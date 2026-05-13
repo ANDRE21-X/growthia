@@ -521,16 +521,15 @@ let selectedAvatarName = '';
 
 // ===== API CALL — via Netlify Function (proxy seguro) =====
 async function callClaudeAPI(prompt) {
-  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+  const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer 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',
-      'HTTP-Referer': 'https://roaring-lamington-c07f30.netlify.app',
-      'X-Title': 'GrowthIA'
+      'Authorization': 'Bearer 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'
     },
     body: JSON.stringify({
-      model: 'openrouter/auto',
+      model: 'llama3-70b-8192',
+      max_tokens: 1000,
       messages: [{ role: 'user', content: prompt }]
     })
   });
