@@ -528,7 +528,7 @@ async function callClaudeAPI(prompt) {
       'Authorization': 'Bearer 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'
     },
     body: JSON.stringify({
-      model: 'llama3-70b-8192',
+      model: 'llama-3.3-70b-versatile',
       max_tokens: 1000,
       messages: [{ role: 'user', content: prompt }]
     })
