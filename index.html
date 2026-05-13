@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrowthIA – Avatares e Vídeos de IA que Vendem 24h por Dia</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#010101;--bg2:#0d0d0d;--bg3:#161616;--card:#1a1a1a;
+  --border:#2a2a2a;--accent:#fe2c55;--accent2:#25f4ee;
+  --text:#ffffff;--muted:#8a8a8a;--radius:12px;
+  --font:'IBM Plex Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:60px;background:rgba(1,1,1,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.logo{font-weight:700;font-size:1.35rem;letter-spacing:-.5px;display:flex;align-items:center}
+.lg{color:var(--accent)}.lc{color:var(--accent2)}.lw{color:var(--text)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.875rem;font-weight:500;transition:.15s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent);color:#fff;padding:9px 20px;border-radius:6px;font-weight:600;font-size:.875rem;text-decoration:none;transition:.15s}
+.nav-cta:hover{background:#d9203a}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 6% 80px;position:relative;overflow:hidden}
+.gr{position:absolute;width:560px;height:560px;background:radial-gradient(circle,rgba(254,44,85,.13) 0%,transparent 70%);top:30%;left:28%;pointer-events:none;animation:gp 4s ease-in-out infinite}
+.gc{position:absolute;width:480px;height:480px;background:radial-gradient(circle,rgba(37,244,238,.07) 0%,transparent 70%);top:38%;right:18%;pointer-events:none;animation:gp 4s ease-in-out infinite 2s}
+@keyframes gp{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(254,44,85,.1);border:1px solid rgba(254,44,85,.3);color:var(--accent);padding:6px 14px;border-radius:999px;font-size:.75rem;font-weight:600;letter-spacing:.8px;margin-bottom:30px;text-transform:uppercase}
+.bdot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:bl 1.5s ease-in-out infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(2.8rem,6.5vw,5.2rem);font-weight:700;line-height:1.06;letter-spacing:-2.5px;max-width:860px;margin-bottom:22px}
+.hero h1 .red{color:var(--accent)}.hero h1 .cyan{color:var(--accent2)}
+.hero p{color:var(--muted);font-size:1.05rem;max-width:520px;line-height:1.72;margin-bottom:40px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn-p{background:var(--accent);color:#fff;padding:14px 32px;border-radius:8px;font-weight:600;font-size:.95rem;text-decoration:none;transition:.15s;cursor:pointer;border:none}
+.btn-p:hover{background:#d9203a;transform:translateY(-1px)}
+.btn-s{background:transparent;color:var(--text);padding:14px 32px;border-radius:8px;font-weight:500;font-size:.95rem;text-decoration:none;border:1px solid var(--border);transition:.15s;cursor:pointer}
+.btn-s:hover{border-color:#555}
+
+.stats-bar{display:flex;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.si{text-align:center;padding:28px 48px;border-right:1px solid var(--border)}
+.si:last-child{border-right:none}
+.si strong{display:block;font-size:2rem;font-weight:700;letter-spacing:-1.5px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.si span{color:var(--muted);font-size:.8rem;font-weight:500;text-transform:uppercase;letter-spacing:.5px;margin-top:4px;display:block}
+
+section{padding:88px 6%}
+.sl{display:inline-block;color:var(--accent);font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px;border-left:2px solid var(--accent);padding-left:10px}
+.st{font-size:clamp(1.9rem,3.8vw,3rem);font-weight:700;letter-spacing:-1.5px;line-height:1.1;margin-bottom:14px}
+.ss{color:var(--muted);font-size:.95rem;max-width:480px;line-height:1.72}
+
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;margin-top:52px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.step-card{background:var(--card);padding:30px;transition:.25s;position:relative;overflow:hidden}
+.step-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transform:scaleX(0);transition:.3s;transform-origin:left}
+.step-card:hover{background:var(--bg3)}.step-card:hover::after{transform:scaleX(1)}
+.sn{font-size:3rem;font-weight:700;letter-spacing:-2px;color:var(--accent);opacity:.18;margin-bottom:16px;line-height:1}
+.step-card h3{font-size:1rem;font-weight:600;margin-bottom:10px;letter-spacing:-.3px}
+.step-card p{color:var(--muted);font-size:.855rem;line-height:1.65}
+
+.avatars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:40px}
+.ac{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:12px;transition:.2s;cursor:pointer;text-align:center;position:relative}
+.ac:hover{border-color:var(--accent2);transform:translateY(-3px)}
+.ac.selected{border-color:var(--accent2);background:rgba(37,244,238,.05)}
+.ae{font-size:3rem;width:64px;height:64px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--bg3)}
+.ai span{display:block;font-size:.88rem;font-weight:600;letter-spacing:-.2px}
+.ai small{color:var(--muted);font-size:.73rem}
+.avatar-niche{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-top:4px}
+.nf{background:rgba(254,44,85,.15);color:var(--accent)}
+.nt{background:rgba(37,244,238,.15);color:var(--accent2)}
+.nb{background:rgba(255,200,50,.15);color:#ffc832}
+.ac-select{display:block;width:100%;padding:8px;background:rgba(37,244,238,.1);border:1px solid rgba(37,244,238,.25);color:var(--accent2);font-size:.75rem;font-weight:600;border-radius:6px;cursor:pointer;transition:.15s;margin-top:8px;text-align:center}
+.ac-select:hover,.ac.selected .ac-select{background:var(--accent2);color:#000}
+.selected-badge{position:absolute;top:10px;right:10px;background:var(--accent2);color:#000;font-size:.6rem;font-weight:700;padding:2px 6px;border-radius:4px;display:none}
+.ac.selected .selected-badge{display:block}
+
+.video-studio{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;margin-top:40px}
+.studio-header{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.studio-icon{width:40px;height:40px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.studio-title{font-size:1.1rem;font-weight:700;letter-spacing:-.3px}
+.studio-sub{color:var(--muted);font-size:.8rem}
+.studio-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:768px){.studio-grid{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:8px}
+.form-group label{font-size:.8rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+.form-group input,.form-group select,.form-group textarea{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;color:var(--text);font-family:var(--font);font-size:.88rem;transition:.15s;outline:none;width:100%}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent2)}
+.form-group textarea{resize:vertical;min-height:80px}
+select option{background:var(--bg2)}
+.gen-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--accent),#c0172f);border:none;border-radius:8px;color:#fff;font-size:1rem;font-weight:700;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px;letter-spacing:-.2px}
+.gen-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(254,44,85,.3)}
+.gen-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+.result-area{margin-top:24px;display:none}
+.result-area.show{display:block}
+.result-box{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:24px;position:relative}
+.result-label{font-size:.7rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.result-label::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;animation:bl 1.5s infinite}
+.result-text{color:var(--text);font-size:.9rem;line-height:1.75;white-space:pre-wrap}
+.result-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.ra-btn{padding:9px 18px;border-radius:6px;font-size:.8rem;font-weight:600;cursor:pointer;transition:.15s;border:none}
+.ra-copy{background:rgba(37,244,238,.1);border:1px solid rgba(37,244,238,.25);color:var(--accent2)}
+.ra-copy:hover{background:var(--accent2);color:#000}
+.ra-new{background:rgba(254,44,85,.1);border:1px solid rgba(254,44,85,.25);color:var(--accent)}
+.ra-new:hover{background:var(--accent);color:#fff}
+
+.inf-creator{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;margin-top:40px}
+.inf-preview{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+@media(max-width:768px){.inf-preview{grid-template-columns:1fr}}
+.inf-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center}
+.inf-avatar-big{width:80px;height:80px;border-radius:50%;border:3px solid var(--accent2);display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin:0 auto 16px;background:var(--bg3)}
+.inf-name{font-size:1.2rem;font-weight:700;margin-bottom:4px}
+.inf-handle{color:var(--accent2);font-size:.8rem;margin-bottom:12px}
+.inf-bio{color:var(--muted);font-size:.82rem;line-height:1.65;text-align:left;background:var(--bg3);padding:12px;border-radius:8px;margin-bottom:12px}
+.inf-stats-row{display:flex;justify-content:space-around;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:12px}
+.inf-stat strong{display:block;font-size:1rem;font-weight:700;color:var(--accent2)}
+.inf-stat span{color:var(--muted);font-size:.7rem}
+.inf-script{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px}
+.inf-script h4{font-size:.85rem;font-weight:700;margin-bottom:12px;color:var(--accent)}
+.inf-script pre{color:var(--muted);font-size:.82rem;line-height:1.7;font-family:var(--font);white-space:pre-wrap}
+
+.cat-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:9px 18px;border-radius:999px;font-size:.8rem;font-weight:600;cursor:pointer;transition:.2s;font-family:var(--font)}
+.cat-btn:hover{border-color:var(--accent2);color:var(--text)}
+.cat-btn.active{background:rgba(254,44,85,.12);border-color:var(--accent);color:var(--accent)}
+.tt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.tt-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;transition:.25s;position:relative;overflow:hidden}
+.tt-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.tt-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.tt-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.tt-emoji{font-size:2rem;line-height:1}
+.tt-score{background:rgba(37,244,238,.12);border:1px solid rgba(37,244,238,.25);color:var(--accent2);font-size:.7rem;font-weight:700;padding:4px 10px;border-radius:6px;white-space:nowrap}
+.tt-score.hot{background:rgba(254,44,85,.12);border-color:rgba(254,44,85,.3);color:var(--accent)}
+.tt-name{font-size:.95rem;font-weight:700;margin-bottom:6px;letter-spacing:-.2px;line-height:1.3}
+.tt-sub{color:var(--muted);font-size:.78rem;line-height:1.55;margin-bottom:14px}
+.tt-metrics{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.tt-metric{background:var(--bg2);border-radius:6px;padding:8px;text-align:center}
+.tt-metric strong{display:block;font-size:.88rem;font-weight:700;color:var(--text)}
+.tt-metric span{color:var(--muted);font-size:.65rem;text-transform:uppercase;letter-spacing:.3px}
+.tt-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px}
+.tt-tag{background:var(--bg3);color:var(--muted);font-size:.65rem;padding:3px 8px;border-radius:4px}
+.tt-action{display:flex;gap:6px}
+.tt-btn-main{flex:1;padding:9px;background:var(--accent);border:none;border-radius:7px;color:#fff;font-size:.78rem;font-weight:700;cursor:pointer;transition:.15s;font-family:var(--font)}
+.tt-btn-main:hover{background:#d9203a}
+.tt-btn-sec{padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:7px;color:var(--muted);font-size:.78rem;cursor:pointer;transition:.15s;font-family:var(--font)}
+.tt-btn-sec:hover{border-color:var(--accent2);color:var(--accent2)}
+
+.loading{display:none;align-items:center;justify-content:center;gap:8px;padding:20px;color:var(--muted);font-size:.88rem}
+.loading.show{display:flex}
+.ld{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:ldot .8s ease-in-out infinite}
+.ld:nth-child(2){animation-delay:.15s;background:var(--accent2)}
+.ld:nth-child(3){animation-delay:.3s}
+@keyframes ldot{0%,80%,100%{transform:scale(0.6);opacity:.4}40%{transform:scale(1);opacity:1}}
+
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;margin-top:64px}
+.prc{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;position:relative;transition:.25s}
+.prc:hover{transform:translateY(-3px)}
+.prc.featured{border-color:var(--accent)}
+.prc.vitali{border-color:var(--accent2)}
+.fb{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:.68rem;font-weight:700;padding:5px 16px;border-radius:999px;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap}
+.vb{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--accent2);color:#000;font-size:.68rem;font-weight:700;padding:5px 16px;border-radius:999px;text-transform:uppercase;letter-spacing:.8px;white-space:nowrap}
+.plan-label{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
+.old-price{color:var(--muted);font-size:.88rem;text-decoration:line-through;margin-bottom:4px;min-height:22px}
+.off-badge{display:inline-block;background:var(--accent);color:#fff;font-size:.62rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-left:8px;vertical-align:middle;text-decoration:none}
+.plan-amount{font-size:3.4rem;font-weight:700;letter-spacing:-2px;line-height:1;margin-bottom:4px}
+.plan-amount sup{font-size:1rem;color:var(--muted);font-weight:400;vertical-align:super;letter-spacing:0}
+.plan-amount .cts{font-size:1.4rem;font-weight:400;color:var(--muted)}
+.plan-parcel{color:var(--accent2);font-size:.9rem;font-weight:600;margin-bottom:4px}
+.plan-avista{color:var(--muted);font-size:.78rem;margin-bottom:24px}
+.plan-feats{list-style:none;border-top:1px solid var(--border);padding-top:18px;margin-bottom:26px}
+.plan-feats li{padding:8px 0;border-bottom:1px solid var(--border);font-size:.855rem;color:var(--muted);display:flex;align-items:center;gap:10px}
+.ck{width:17px;height:17px;border-radius:50%;background:rgba(37,244,238,.15);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.62rem;color:var(--accent2)}
+.plan-cta{display:block;text-align:center;padding:14px;border-radius:8px;font-weight:600;font-size:.92rem;text-decoration:none;transition:.15s;letter-spacing:-.2px;cursor:pointer;border:none;width:100%}
+.plan-cta.red{background:var(--accent);color:#fff}
+.plan-cta.red:hover{background:#d9203a}
+.plan-cta.cyan{background:var(--accent2);color:#000}
+.plan-cta.cyan:hover{opacity:.88}
+.plan-cta.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.plan-cta.ghost:hover{border-color:#666}
+.plan-note{text-align:center;font-size:.75rem;color:var(--muted);margin-top:10px}
+
+.faq-list{max-width:680px;margin-top:40px}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0;cursor:pointer}
+.faq-q{font-weight:600;font-size:.93rem;display:flex;justify-content:space-between;align-items:center;gap:20px;letter-spacing:-.2px}
+.faq-icon{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent);font-size:1rem;transition:.2s}
+.faq-item.open .faq-icon{background:var(--accent);color:#fff;border-color:var(--accent)}
+.faq-a{color:var(--muted);font-size:.86rem;line-height:1.72;max-height:0;overflow:hidden;transition:.3s}
+.faq-item.open .faq-a{max-height:200px;margin-top:12px}
+
+footer{padding:36px 6%;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:.82rem}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.show{display:flex}
+.modal-box{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:32px;max-width:600px;width:100%;position:relative;max-height:90vh;overflow-y:auto}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--card);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:.15s}
+.modal-close:hover{color:var(--text);border-color:#666}
+.modal-title{font-size:1.3rem;font-weight:700;margin-bottom:6px;letter-spacing:-.5px}
+.modal-sub{color:var(--muted);font-size:.85rem;margin-bottom:24px}
+
+.toast{position:fixed;bottom:24px;right:24px;background:var(--card);border:1px solid var(--accent2);color:var(--text);padding:14px 20px;border-radius:10px;font-size:.88rem;z-index:999;transform:translateY(100px);opacity:0;transition:.3s;max-width:300px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast-icon{color:var(--accent2);font-size:1rem;margin-right:8px}
+
+.tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:8px;margin-bottom:24px;width:fit-content}
+.tab{padding:8px 20px;border-radius:6px;font-size:.82rem;font-weight:600;cursor:pointer;transition:.15s;border:none;background:transparent;color:var(--muted)}
+.tab.active{background:var(--card);color:var(--text)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero .badge{animation:fadeUp .5s ease both .1s}
+.hero h1{animation:fadeUp .5s ease both .2s;opacity:0}
+.hero p{animation:fadeUp .5s ease both .3s;opacity:0}
+.hero-btns{animation:fadeUp .5s ease both .4s;opacity:0}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+@media(max-width:768px){.nav-links{display:none}.si{padding:22px 24px;border-right:none;border-bottom:1px solid var(--border);flex:1 1 45%}.pricing-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><span class="lg">G</span><span class="lc">r</span><span class="lw">owth</span><span class="lc">IA</span></div>
+  <ul class="nav-links">
+    <li><a href="#como-funciona">Como funciona</a></li>
+    <li><a href="#avatares">Avatares</a></li>
+    <li><a href="#influencers">Influenciadores IA</a></li>
+    <li><a href="#videos">Criar Vídeo</a></li>
+    <li><a href="#precos">Preços</a></li>
+  </ul>
+  <a href="#videos" class="nav-cta">Criar Vídeo Agora</a>
+</nav>
+
+<section class="hero">
+  <div class="gr"></div><div class="gc"></div>
+  <div class="badge"><span class="bdot"></span>Plataforma de IA para criadores</div>
+  <h1>Crie avatares e vídeos de IA que <span class="red">vendem</span> <span class="cyan">24h</span> por dia</h1>
+  <p>Do produto viral ao vídeo pronto em minutos. Sem gravar, sem aparecer na câmera, sem edição.</p>
+  <div class="hero-btns">
+    <button class="btn-p" onclick="document.getElementById('videos').scrollIntoView({behavior:'smooth'})">Quero Vender Agora</button>
+    <button class="btn-s" onclick="document.getElementById('como-funciona').scrollIntoView({behavior:'smooth'})">Ver como funciona →</button>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="si"><strong>+12.400</strong><span>Criadores ativos</span></div>
+  <div class="si"><strong>R$4.2M</strong><span>Gerados pelos usuários</span></div>
+  <div class="si"><strong>88.7%</strong><span>Taxa de aprovação</span></div>
+  <div class="si"><strong>&lt;3 min</strong><span>Por vídeo criado</span></div>
+</div>
+
+<section id="como-funciona">
+  <div class="sl">Processo</div>
+  <h2 class="st">4 passos. Do zero às vendas.</h2>
+  <p class="ss">Qualquer pessoa consegue — mesmo quem nunca gravou um vídeo na vida.</p>
+  <div class="steps-grid">
+    <div class="step-card" style="cursor:pointer" onclick="document.getElementById('tiktok-finder').scrollIntoView({behavior:'smooth'})">
+      <div class="sn">01</div>
+      <h3>Encontre produtos campeões de vendas no TikTok Shop</h3>
+      <p>Nossa IA analisa o TikTok Shop Brasil e entrega os produtos com maior potencial de lucro agora. <span style="color:var(--accent2)">→ Buscar agora</span></p>
+    </div>
+    <div class="step-card"><div class="sn">02</div><h3>Crie influenciadores que vendem como você nunca viu</h3><p>Avatares de IA com rosto, voz e personalidade. Trabalham enquanto você dorme.</p></div>
+    <div class="step-card"><div class="sn">03</div><h3>Monte vídeos que prendem atenção e convertem</h3><p>Templates prontos, roteiros otimizados e edição automática em menos de 3 minutos.</p></div>
+    <div class="step-card"><div class="sn">04</div><h3>Distribua e escale vídeos prontos para vender</h3><p>Publique em múltiplas plataformas e acompanhe resultados em tempo real.</p></div>
+  </div>
+</section>
+
+<!-- TIKTOK SHOP FINDER -->
+<section id="tiktok-finder" style="background:var(--bg2)">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+    <div class="sl" style="margin-bottom:0">TikTok Shop</div>
+    <span style="background:rgba(254,44,85,.15);border:1px solid rgba(254,44,85,.3);color:var(--accent);font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:999px;letter-spacing:.5px;text-transform:uppercase">🔴 Ao vivo</span>
+  </div>
+  <h2 class="st">Produtos campeões do TikTok Shop Brasil</h2>
+  <p class="ss">Escolha uma categoria e nossa IA analisa tendências, comissões e potencial de lucro — agora mesmo.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:32px;margin-bottom:24px">
+    <button class="cat-btn active" onclick="searchTikTokProducts('Beleza e Skincare',this)">💄 Beleza</button>
+    <button class="cat-btn" onclick="searchTikTokProducts('Saúde e Suplementos',this)">💊 Saúde</button>
+    <button class="cat-btn" onclick="searchTikTokProducts('Emagrecimento e Fitness',this)">💪 Fitness</button>
+    <button class="cat-btn" onclick="searchTikTokProducts('Casa e Organização',this)">🏠 Casa</button>
+    <button class="cat-btn" onclick="searchTikTokProducts('Moda e Acessórios',this)">👗 Moda</button>
+    <button class="cat-btn" onclick="searchTikTokProducts('Eletrônicos e Gadgets',this)">📱 Tech</button>
+    <button class="cat-btn" onclick="searchTikTokProducts('Pet e Animais',this)">🐾 Pet</button>
+    <button class="cat-btn" onclick="searchTikTokProducts('Infantil e Brinquedos',this)">🧸 Kids</button>
+  </div>
+  <div style="display:flex;gap:10px;margin-bottom:28px">
+    <input type="text" id="ttSearchInput" placeholder="Buscar categoria ou produto específico..." style="flex:1;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;color:var(--text);font-family:var(--font);font-size:.9rem;outline:none;transition:.15s" onfocus="this.style.borderColor='var(--accent2)'" onblur="this.style.borderColor='var(--border)'" onkeydown="if(event.key==='Enter')searchTikTokProductsManual()">
+    <button class="btn-p" onclick="searchTikTokProductsManual()" style="padding:12px 24px;border-radius:8px;white-space:nowrap">🔍 Buscar</button>
+  </div>
+  <div class="loading" id="ttLoading"><div class="ld"></div><div class="ld"></div><div class="ld"></div><span>Analisando TikTok Shop Brasil...</span></div>
+  <div id="ttProductsGrid" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div id="ttResultTitle" style="font-size:.85rem;color:var(--muted)"></div>
+      <button class="ra-btn ra-copy" onclick="copyTTResults()" style="font-size:.75rem">📋 Copiar todos</button>
+    </div>
+    <div class="tt-grid" id="ttCards"></div>
+  </div>
+  <div id="ttAnalysis" style="display:none;margin-top:24px">
+    <div class="result-box">
+      <div class="result-label">🧠 Análise estratégica da IA</div>
+      <div class="result-text" id="ttAnalysisText"></div>
+      <div class="result-actions" style="margin-top:12px">
+        <button class="ra-btn ra-copy" onclick="copyText('ttAnalysisText')">📋 Copiar análise</button>
+        <button class="ra-btn" style="background:rgba(254,44,85,.1);border:1px solid rgba(254,44,85,.25);color:var(--accent)" onclick="generateVideoFromProduct()">🎬 Criar vídeo para este nicho</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVATARES -->
+<section id="avatares" style="background:var(--bg2)">
+  <div class="sl">Avatares</div>
+  <h2 class="st">Biblioteca completa de avatares IA</h2>
+  <p class="ss">Escolha um avatar pronto ou crie o seu. Cada um tem voz, personalidade e estilo únicos.</p>
+  <div class="tabs" style="margin-top:32px">
+    <button class="tab active" onclick="filterAvatars('todos',this)">Todos</button>
+    <button class="tab" onclick="filterAvatars('fitness',this)">Fitness</button>
+    <button class="tab" onclick="filterAvatars('tech',this)">Tech</button>
+    <button class="tab" onclick="filterAvatars('beauty',this)">Beauty</button>
+    <button class="tab" onclick="filterAvatars('business',this)">Business</button>
+  </div>
+  <div class="avatars-grid" id="avatarsGrid">
+    <div class="ac" data-niche="fitness" onclick="selectAvatar(this,'Sofia','Fitness')"><span class="selected-badge">✓ Selecionado</span><div class="ae">👩🏻</div><div class="ai"><span>Sofia</span><small>+2.3k vídeos gerados</small></div><span class="avatar-niche nf">Fitness</span><button class="ac-select">Selecionar Avatar</button></div>
+    <div class="ac" data-niche="tech" onclick="selectAvatar(this,'Carlos','Tech')"><span class="selected-badge">✓ Selecionado</span><div class="ae">👨🏾</div><div class="ai"><span>Carlos</span><small>+1.8k vídeos gerados</small></div><span class="avatar-niche nt">Tech</span><button class="ac-select">Selecionar Avatar</button></div>
+    <div class="ac" data-niche="beauty" onclick="selectAvatar(this,'Julia','Beauty')"><span class="selected-badge">✓ Selecionado</span><div class="ae">👩🏽</div><div class="ai"><span>Julia</span><small>+3.1k vídeos gerados</small></div><span class="avatar-niche nf">Beauty</span><button class="ac-select">Selecionar Avatar</button></div>
+    <div class="ac" data-niche="business" onclick="selectAvatar(this,'Rafael','Lifestyle')"><span class="selected-badge">✓ Selecionado</span><div class="ae">👨🏻</div><div class="ai"><span>Rafael</span><small>+900 vídeos gerados</small></div><span class="avatar-niche nb">Business</span><button class="ac-select">Selecionar Avatar</button></div>
+    <div class="ac" data-niche="beauty" onclick="selectAvatar(this,'Aisha','Fashion')"><span class="selected-badge">✓ Selecionado</span><div class="ae">👩🏿</div><div class="ai"><span>Aisha</span><small>+1.2k vídeos gerados</small></div><span class="avatar-niche nf">Fashion</span><button class="ac-select">Selecionar Avatar</button></div>
+    <div class="ac" data-niche="business" onclick="selectAvatar(this,'Marco','Business')"><span class="selected-badge">✓ Selecionado</span><div class="ae">👨🏽</div><div class="ai"><span>Marco</span><small>+2.7k vídeos gerados</small></div><span class="avatar-niche nb">Business</span><button class="ac-select">Selecionar Avatar</button></div>
+    <div class="ac" data-niche="fitness" onclick="selectAvatar(this,'Lara','Fitness')"><span class="selected-badge">✓ Selecionado</span><div class="ae">👩🏻‍🦰</div><div class="ai"><span>Lara</span><small>+4.0k vídeos gerados</small></div><span class="avatar-niche nf">Fitness</span><button class="ac-select">Selecionar Avatar</button></div>
+    <div class="ac" data-niche="tech" onclick="selectAvatar(this,'Diego','Tech')"><span class="selected-badge">✓ Selecionado</span><div class="ae">🧑🏻‍💻</div><div class="ai"><span>Diego</span><small>+1.1k vídeos gerados</small></div><span class="avatar-niche nt">Tech</span><button class="ac-select">Selecionar Avatar</button></div>
+    <div class="ac" data-niche="custom" onclick="openCustomAvatarModal()"><span class="selected-badge">✓ Selecionado</span><div class="ae">✨</div><div class="ai"><span>Criar meu avatar</span><small>Personalizado com IA</small></div><span class="avatar-niche nt">Personalizado</span><button class="ac-select">Criar Agora</button></div>
+  </div>
+</section>
+
+<!-- INFLUENCIADORES IA -->
+<section id="influencers">
+  <div class="sl">Influenciadores IA</div>
+  <h2 class="st">Crie um influenciador do zero</h2>
+  <p class="ss">Descreva a personalidade e nossa IA cria nome, bio, roteiro de apresentação e perfil completo.</p>
+  <div class="inf-creator">
+    <div class="studio-header">
+      <div class="studio-icon">🎭</div>
+      <div><div class="studio-title">Gerador de Influenciador IA</div><div class="studio-sub">Preencha os campos e gere um influenciador completo em segundos</div></div>
+    </div>
+    <div class="studio-grid">
+      <div class="form-group"><label>Nicho / Área de atuação</label><select id="infNiche"><option value="fitness e saúde">Fitness e Saúde</option><option value="beleza e maquiagem">Beleza e Maquiagem</option><option value="tecnologia e gadgets">Tecnologia e Gadgets</option><option value="moda e estilo">Moda e Estilo</option><option value="culinária e receitas">Culinária e Receitas</option><option value="finanças pessoais">Finanças Pessoais</option><option value="desenvolvimento pessoal">Desenvolvimento Pessoal</option><option value="emagrecimento">Emagrecimento</option><option value="marketing digital">Marketing Digital</option></select></div>
+      <div class="form-group"><label>Tom de voz</label><select id="infTone"><option value="animado e motivacional">Animado e Motivacional</option><option value="sério e profissional">Sério e Profissional</option><option value="descontraído e divertido">Descontraído e Divertido</option><option value="íntimo e confessional">Íntimo e Confessional</option><option value="especialista e técnico">Especialista e Técnico</option></select></div>
+      <div class="form-group"><label>Gênero do avatar</label><select id="infGender"><option value="feminino">Feminino</option><option value="masculino">Masculino</option><option value="neutro">Neutro</option></select></div>
+      <div class="form-group"><label>Produto principal para promover</label><input type="text" id="infProduct" placeholder="Ex: suplemento termogênico, curso online..."></div>
+    </div>
+    <button class="gen-btn" id="infGenBtn" onclick="generateInfluencer()"><span>🎭</span> Gerar Influenciador IA Completo</button>
+    <div class="loading" id="infLoading"><div class="ld"></div><div class="ld"></div><div class="ld"></div><span>Criando seu influenciador IA...</span></div>
+    <div class="result-area" id="infResult">
+      <div class="inf-preview">
+        <div class="inf-card">
+          <div class="inf-avatar-big" id="infAvatarEmoji">🌟</div>
+          <div class="inf-name" id="infName">—</div>
+          <div class="inf-handle" id="infHandle">—</div>
+          <div class="inf-bio" id="infBio">—</div>
+          <div class="inf-stats-row">
+            <div class="inf-stat"><strong id="infFollowers">—</strong><span>Seguidores</span></div>
+            <div class="inf-stat"><strong id="infEngagement">—</strong><span>Engajamento</span></div>
+            <div class="inf-stat"><strong id="infVideos">—</strong><span>Vídeos</span></div>
+          </div>
+          <button class="ac-select" onclick="useInfluencer()" style="width:100%">Usar este influenciador</button>
+        </div>
+        <div class="inf-script">
+          <h4>📝 Roteiro de apresentação gerado</h4>
+          <pre id="infScript">—</pre>
+          <div class="result-actions" style="margin-top:12px">
+            <button class="ra-btn ra-copy" onclick="copyText('infScript')">📋 Copiar roteiro</button>
+            <button class="ra-btn ra-new" onclick="generateInfluencer()">🔄 Gerar novo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GERADOR DE VÍDEO -->
+<section id="videos" style="background:var(--bg2)">
+  <div class="sl">Gerador de Vídeos</div>
+  <h2 class="st">Crie seu roteiro de vídeo viral</h2>
+  <p class="ss">IA cria o roteiro completo, legenda, call-to-action e dicas de edição para qualquer plataforma.</p>
+  <div class="video-studio">
+    <div class="studio-header">
+      <div class="studio-icon">🎬</div>
+      <div><div class="studio-title">Studio de Vídeo IA</div><div class="studio-sub">Avatar selecionado: <span id="selectedAvatarDisplay" style="color:var(--accent2)">Nenhum — escolha um avatar acima</span></div></div>
+    </div>
+    <div class="studio-grid">
+      <div class="form-group"><label>Produto a promover</label><input type="text" id="vProductName" placeholder="Ex: Suplemento Termogênico Plus"></div>
+      <div class="form-group"><label>Plataforma de destino</label><select id="vPlatform"><option value="TikTok">TikTok</option><option value="Instagram Reels">Instagram Reels</option><option value="YouTube Shorts">YouTube Shorts</option><option value="Facebook">Facebook</option></select></div>
+      <div class="form-group"><label>Duração do vídeo</label><select id="vDuration"><option value="15 segundos">15 segundos (ultra-curto)</option><option value="30 segundos" selected>30 segundos (ideal)</option><option value="60 segundos">60 segundos (detalhado)</option><option value="90 segundos">90 segundos (completo)</option></select></div>
+      <div class="form-group"><label>Objetivo do vídeo</label><select id="vGoal"><option value="vendas diretas">Vendas diretas</option><option value="gerar curiosidade e cliques">Gerar curiosidade</option><option value="construir autoridade">Construir autoridade</option><option value="mostrar resultados e provas sociais">Mostrar resultados</option><option value="responder objeções comuns">Responder objeções</option></select></div>
+      <div class="form-group" style="grid-column:1/-1"><label>Benefícios do produto (opcional)</label><textarea id="vBenefits" placeholder="Ex: emagrece 5kg em 30 dias, 100% natural, sem efeitos colaterais..."></textarea></div>
+    </div>
+    <button class="gen-btn" id="videoGenBtn" onclick="generateVideo()"><span>🎬</span> Gerar Roteiro de Vídeo com IA</button>
+    <div class="loading" id="videoLoading"><div class="ld"></div><div class="ld"></div><div class="ld"></div><span>Criando seu roteiro viral...</span></div>
+    <div class="result-area" id="videoResult">
+      <div class="result-box">
+        <div class="result-label">Roteiro gerado pela IA</div>
+        <div class="result-text" id="videoResultText"></div>
+        <div class="result-actions">
+          <button class="ra-btn ra-copy" onclick="copyText('videoResultText')">📋 Copiar roteiro</button>
+          <button class="ra-btn ra-new" onclick="generateVideo()">🔄 Gerar variação</button>
+          <button class="ra-btn" style="background:rgba(255,200,50,.1);border:1px solid rgba(255,200,50,.25);color:#ffc832" onclick="generateHashtags()">🏷️ Gerar hashtags</button>
+        </div>
+      </div>
+      <div class="result-box" id="hashtagBox" style="margin-top:12px;display:none">
+        <div class="result-label">Hashtags para máximo alcance</div>
+        <div class="result-text" id="hashtagResult"></div>
+        <div class="result-actions"><button class="ra-btn ra-copy" onclick="copyText('hashtagResult')">📋 Copiar hashtags</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="precos">
+  <div class="sl">Planos</div>
+  <h2 class="st">Escolha seu plano e comece agora</h2>
+  <p class="ss">Todos os planos parcelam em até 10x no cartão. Acesso imediato após a compra.</p>
+  <div class="pricing-grid">
+    <div class="prc">
+      <div class="plan-label">Assinatura Mensal</div>
+      <div class="old-price">De R$ 197,90 <span class="off-badge">51% OFF</span></div>
+      <div class="plan-amount"><sup>R$</sup>97<span class="cts">,90</span></div>
+      <div class="plan-parcel">10x de R$ 9,79 no cartão</div>
+      <div class="plan-avista">ou R$ 97,90 à vista no Pix/boleto</div>
+      <ul class="plan-feats"><li><span class="ck">✓</span>Vídeos ilimitados todo mês</li><li><span class="ck">✓</span>Todos os avatares de IA</li><li><span class="ck">✓</span>Biblioteca Viral completa</li><li><span class="ck">✓</span>Prompts prontos para usar</li><li><span class="ck">✓</span>Suporte prioritário</li></ul>
+      <button class="plan-cta ghost" onclick="openCheckout('Mensal','R$ 97,90')">Assinar Plano Mensal</button>
+      <p class="plan-note">Cancele quando quiser</p>
+    </div>
+    <div class="prc featured">
+      <div class="fb">⭐ Mais Popular</div>
+      <div class="plan-label">Plano Anual</div>
+      <div class="old-price">De R$ 287,00 <span class="off-badge">31% OFF</span></div>
+      <div class="plan-amount"><sup>R$</sup>197<span class="cts">,90</span></div>
+      <div class="plan-parcel">10x de R$ 19,79 no cartão</div>
+      <div class="plan-avista">ou R$ 197,90 à vista no Pix/boleto</div>
+      <ul class="plan-feats"><li><span class="ck">✓</span>Tudo do plano mensal</li><li><span class="ck">✓</span>Acesso garantido por 12 meses</li><li><span class="ck">✓</span>API exclusiva GrowthIA</li><li><span class="ck">✓</span>Relatórios avançados</li><li><span class="ck">✓</span>Agentes de integração</li><li><span class="ck">✓</span>Onboarding 1:1</li></ul>
+      <button class="plan-cta red" onclick="openCheckout('Anual','R$ 197,90')">Assinar Plano Anual</button>
+      <p class="plan-note">Melhor custo-benefício</p>
+    </div>
+    <div class="prc vitali">
+      <div class="vb">♾️ Acesso Vitalício</div>
+      <div class="plan-label">Vitalício</div>
+      <div class="old-price">&nbsp;</div>
+      <div class="plan-amount"><sup>R$</sup>397<span class="cts">,00</span></div>
+      <div class="plan-parcel">10x de R$ 39,70 no cartão</div>
+      <div class="plan-avista">ou R$ 397,00 à vista no Pix/boleto</div>
+      <ul class="plan-feats"><li><span class="ck">✓</span>Tudo do plano anual</li><li><span class="ck">✓</span>Acesso para sempre</li><li><span class="ck">✓</span>Todas as atualizações futuras</li><li><span class="ck">✓</span>Suporte VIP exclusivo</li><li><span class="ck">✓</span>Sem mensalidade nunca mais</li><li><span class="ck">✓</span>Bônus exclusivos vitalícios</li></ul>
+      <button class="plan-cta cyan" onclick="openCheckout('Vitalício','R$ 397,00')">Garantir Acesso Vitalício</button>
+      <p class="plan-note">Pague uma vez, use para sempre</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="sl">FAQ</div>
+  <h2 class="st">Perguntas Frequentes</h2>
+  <div class="faq-list">
+    <div class="faq-item"><div class="faq-q">O que é o GrowthIA?<span class="faq-icon">+</span></div><div class="faq-a">O GrowthIA é uma plataforma de inteligência artificial para criar avatares digitais e vídeos de vendas automaticamente — sem aparecer na câmera ou contratar editores.</div></div>
+    <div class="faq-item"><div class="faq-q">Preciso saber editar vídeos?<span class="faq-icon">+</span></div><div class="faq-a">Não! A plataforma é 100% automatizada. Você escolhe o produto, o avatar e o GrowthIA cria o vídeo completo em menos de 3 minutos.</div></div>
+    <div class="faq-item"><div class="faq-q">Posso parcelar a compra?<span class="faq-icon">+</span></div><div class="faq-a">Sim! Todos os planos parcelam em até 10x no cartão de crédito. O acesso é liberado imediatamente após a confirmação do pagamento.</div></div>
+    <div class="faq-item"><div class="faq-q">Qual a diferença entre Anual e Vitalício?<span class="faq-icon">+</span></div><div class="faq-a">O plano Anual dura 12 meses e precisa de renovação. O Vitalício é pago uma única vez e você tem acesso para sempre, incluindo todas as atualizações futuras.</div></div>
+    <div class="faq-item"><div class="faq-q">Os avatares parecem reais?<span class="faq-icon">+</span></div><div class="faq-a">Sim! Nossos avatares têm expressões faciais, voz e movimentos naturais que engajam e convencem o público nas redes sociais.</div></div>
+    <div class="faq-item"><div class="faq-q">Posso cancelar o plano mensal?<span class="faq-icon">+</span></div><div class="faq-a">Sim, com 1 clique na área de configurações. Sem multa, sem prazo mínimo, sem burocracia.</div></div>
+    <div class="faq-item"><div class="faq-q">Como recebo suporte?<span class="faq-icon">+</span></div><div class="faq-a">Chat, email e comunidade exclusiva no WhatsApp. Planos avançados incluem suporte prioritário e onboarding individual.</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo"><span class="lg">G</span><span class="lc">r</span><span class="lw">owth</span><span class="lc">IA</span></div>
+  <span>© 2025 GrowthIA. Todos os direitos reservados.</span>
+</footer>
+
+<!-- MODAL: Avatar personalizado -->
+<div class="modal-overlay" id="customAvatarModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('customAvatarModal')">✕</button>
+    <div class="modal-title">✨ Criar Avatar Personalizado</div>
+    <div class="modal-sub">Descreva como quer seu avatar e a IA cria a identidade completa</div>
+    <div class="form-group" style="margin-bottom:16px"><label>Nicho do avatar</label><input type="text" id="customNiche" placeholder="Ex: nutrição esportiva, moda plus size..."></div>
+    <div class="form-group" style="margin-bottom:16px"><label>Tom de voz e personalidade</label><input type="text" id="customPersonality" placeholder="Ex: energético, motivador, especialista..."></div>
+    <div class="form-group" style="margin-bottom:20px"><label>Público-alvo</label><input type="text" id="customAudience" placeholder="Ex: mulheres 25-40 anos que querem emagrecer..."></div>
+    <button class="gen-btn" onclick="generateCustomAvatar()"><span>✨</span> Criar meu avatar IA</button>
+    <div class="loading" id="customAvatarLoading" style="margin-top:16px"><div class="ld"></div><div class="ld"></div><div class="ld"></div><span>Criando seu avatar personalizado...</span></div>
+    <div class="result-area" id="customAvatarResult" style="margin-top:16px">
+      <div class="result-box">
+        <div class="result-label">Avatar criado pela IA</div>
+        <div class="result-text" id="customAvatarText"></div>
+        <div class="result-actions"><button class="ra-btn ra-copy" onclick="copyText('customAvatarText')">📋 Copiar</button><button class="ra-btn ra-new" onclick="generateCustomAvatar()">🔄 Gerar novo</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Checkout -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal-box" style="max-width:440px;text-align:center">
+    <button class="modal-close" onclick="closeModal('checkoutModal')">✕</button>
+    <div style="font-size:2.5rem;margin-bottom:16px">🚀</div>
+    <div class="modal-title" id="checkoutTitle">Plano Selecionado</div>
+    <div class="modal-sub" id="checkoutSub">Você escolheu o melhor plano para crescer</div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;margin:20px 0;text-align:left">
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:8px">Escolha sua plataforma de pagamento:</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+        <button class="gen-btn" style="background:linear-gradient(135deg,#009c3b,#007a2e)" onclick="redirectPayment('hotmart')">💳 Pagar via Hotmart</button>
+        <button class="gen-btn" style="background:linear-gradient(135deg,#6c4ef2,#4b2fd4);margin-top:4px" onclick="redirectPayment('kiwify')">💜 Pagar via Kiwify</button>
+        <button class="gen-btn" style="background:linear-gradient(135deg,#0066cc,#004da3);margin-top:4px" onclick="redirectPayment('eduzz')">🔵 Pagar via Eduzz</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span class="toast-icon">✓</span><span id="toastMsg"></span></div>
+
+<script>
+// ===== STATE =====
+let selectedAvatar = null;
+let selectedAvatarName = '';
+
+// ===== API CALL — via Netlify Function (proxy seguro) =====
+async function callClaudeAPI(prompt) {
+  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer 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',
+      'HTTP-Referer': 'https://roaring-lamington-c07f30.netlify.app',
+      'X-Title': 'GrowthIA'
+    },
+    body: JSON.stringify({
+      model: 'openrouter/auto',
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  const data = await response.json();
+  if (data.error) throw new Error(data.error.message || JSON.stringify(data.error));
+  return data.choices[0].message.content;
+}
+
+// ===== AVATAR =====
+function selectAvatar(el, name, niche) {
+  document.querySelectorAll('.ac').forEach(a => a.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedAvatar = name;
+  selectedAvatarName = name + ' – ' + niche;
+  document.getElementById('selectedAvatarDisplay').textContent = selectedAvatarName;
+  showToast('Avatar ' + name + ' selecionado! ✓');
+}
+
+function filterAvatars(niche, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.ac').forEach(ac => {
+    ac.style.display = (niche === 'todos' || ac.dataset.niche === niche) ? 'flex' : 'none';
+  });
+}
+
+function openCustomAvatarModal() {
+  document.getElementById('customAvatarModal').classList.add('show');
+}
+
+// ===== INFLUENCER =====
+async function generateInfluencer() {
+  const niche = document.getElementById('infNiche').value;
+  const tone = document.getElementById('infTone').value;
+  const gender = document.getElementById('infGender').value;
+  const product = document.getElementById('infProduct').value || 'produto do nicho';
+  const btn = document.getElementById('infGenBtn');
+  const loading = document.getElementById('infLoading');
+  const result = document.getElementById('infResult');
+  btn.disabled = true; loading.classList.add('show'); result.classList.remove('show');
+  const prompt = `Você é um estrategista de marketing digital especialista em criar influenciadores digitais de IA para o mercado brasileiro.
+Crie um influenciador IA completo para o nicho de "${niche}", com tom de voz "${tone}", gênero ${gender}, que promoverá "${product}".
+Responda APENAS em JSON válido, sem markdown, sem explicações, exatamente neste formato:
+{"emoji":"um emoji","nome":"Nome completo brasileiro","handle":"@handle_instagram","bio":"Bio de 2-3 frases. Máx 120 caracteres.","seguidores":"ex: 847K","engajamento":"ex: 8.3%","videos":"ex: 234","roteiro":"Roteiro de apresentação de 60-90 palavras para vídeo de 30s, em primeira pessoa, com gancho forte e CTA de vendas."}`;
+  try {
+    const raw = await callClaudeAPI(prompt);
+    const data = JSON.parse(raw.replace(/```json|```/g,'').trim());
+    document.getElementById('infAvatarEmoji').textContent = data.emoji;
+    document.getElementById('infName').textContent = data.nome;
+    document.getElementById('infHandle').textContent = data.handle;
+    document.getElementById('infBio').textContent = data.bio;
+    document.getElementById('infFollowers').textContent = data.seguidores;
+    document.getElementById('infEngagement').textContent = data.engajamento;
+    document.getElementById('infVideos').textContent = data.videos;
+    document.getElementById('infScript').textContent = data.roteiro;
+    result.classList.add('show');
+  } catch(e) { showToast('Erro ao gerar. Verifique a configuração.'); console.error(e); }
+  finally { btn.disabled = false; loading.classList.remove('show'); }
+}
+
+function useInfluencer() {
+  const name = document.getElementById('infName').textContent;
+  if(name && name !== '—') {
+    selectedAvatarName = name + ' (Influenciador personalizado)';
+    document.getElementById('selectedAvatarDisplay').textContent = selectedAvatarName;
+    document.getElementById('videos').scrollIntoView({behavior:'smooth'});
+    showToast('Influenciador ' + name + ' ativado! ✓');
+  }
+}
+
+// ===== VIDEO =====
+async function generateVideo() {
+  const product = document.getElementById('vProductName').value || 'produto de saúde';
+  const platform = document.getElementById('vPlatform').value;
+  const duration = document.getElementById('vDuration').value;
+  const goal = document.getElementById('vGoal').value;
+  const benefits = document.getElementById('vBenefits').value;
+  const avatar = selectedAvatarName || 'avatar genérico';
+  const btn = document.getElementById('videoGenBtn');
+  const loading = document.getElementById('videoLoading');
+  const result = document.getElementById('videoResult');
+  const hashBox = document.getElementById('hashtagBox');
+  btn.disabled = true; loading.classList.add('show'); result.classList.remove('show'); hashBox.style.display = 'none';
+  const prompt = `Você é um expert em criação de conteúdo viral para redes sociais brasileiras e copywriting de vendas.
+Crie um roteiro de vídeo COMPLETO e PRONTO PARA USAR:
+- Produto: ${product}
+- Plataforma: ${platform}
+- Duração: ${duration}
+- Objetivo: ${goal}
+- Avatar: ${avatar}
+${benefits ? '- Benefícios: ' + benefits : ''}
+O roteiro deve ter:
+🎬 GANCHO (0-3s): frase que para o scroll
+📢 DESENVOLVIMENTO: problema e solução
+✨ PROVA: benefício principal
+🛒 CTA: chamada para ação urgente
+Escreva em primeira pessoa, linguagem coloquial brasileira, com [pausas] e dicas entre colchetes. Ao final: "💡 DICA DE EDIÇÃO:" com 1 dica prática.`;
+  try {
+    const text = await callClaudeAPI(prompt);
+    document.getElementById('videoResultText').textContent = text;
+    result.classList.add('show');
+  } catch(e) { showToast('Erro ao gerar roteiro. Tente novamente.'); console.error(e); }
+  finally { btn.disabled = false; loading.classList.remove('show'); }
+}
+
+async function generateHashtags() {
+  const product = document.getElementById('vProductName').value || 'produto';
+  const platform = document.getElementById('vPlatform').value;
+  const hashBox = document.getElementById('hashtagBox');
+  const hashResult = document.getElementById('hashtagResult');
+  hashBox.style.display = 'block'; hashResult.textContent = '⏳ Gerando hashtags...';
+  const prompt = `Crie 25 hashtags otimizadas para ${platform} para promover "${product}" no mercado brasileiro.
+Divida em 3 grupos:
+🔥 ALTA BUSCA (5): as mais populares do nicho
+🎯 NICHO (10): específicas do produto
+💎 CAUDA LONGA (10): menos concorridas mas relevantes
+Apenas as hashtags, uma por linha, com os emojis de grupo. Sem explicações.`;
+  try {
+    const text = await callClaudeAPI(prompt);
+    hashResult.textContent = text;
+  } catch(e) { hashResult.textContent = 'Erro ao gerar hashtags.'; }
+}
+
+// ===== CUSTOM AVATAR =====
+async function generateCustomAvatar() {
+  const niche = document.getElementById('customNiche').value || 'geral';
+  const personality = document.getElementById('customPersonality').value || 'carismático';
+  const audience = document.getElementById('customAudience').value || 'adultos';
+  const loading = document.getElementById('customAvatarLoading');
+  const result = document.getElementById('customAvatarResult');
+  const resultText = document.getElementById('customAvatarText');
+  loading.classList.add('show'); result.classList.remove('show');
+  const prompt = `Crie um avatar digital completo para o mercado brasileiro:
+- Nicho: ${niche}
+- Personalidade: ${personality}
+- Público-alvo: ${audience}
+Responda com:
+NOME: [nome completo]
+HANDLE: [@username]
+EMOJI: [emoji representativo]
+PERSONALIDADE: [3-4 frases]
+ESTILO DE CONTEÚDO: [tipos de vídeos]
+FRASE MARCA: [frase de assinatura]
+SCRIPT INICIAL: [roteiro de 30s de apresentação]`;
+  try {
+    const text = await callClaudeAPI(prompt);
+    resultText.textContent = text;
+    result.classList.add('show');
+  } catch(e) { resultText.textContent = 'Erro ao gerar avatar.'; result.classList.add('show'); }
+  finally { loading.classList.remove('show'); }
+}
+
+// ===== TIKTOK SHOP FINDER =====
+let ttProductsRaw = '';
+
+function searchTikTokProductsManual() {
+  const val = document.getElementById('ttSearchInput').value.trim();
+  if(val) searchTikTokProducts(val, null);
+}
+
+async function searchTikTokProducts(category, btn) {
+  if(btn) { document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); }
+  const loading = document.getElementById('ttLoading');
+  const grid = document.getElementById('ttProductsGrid');
+  const analysis = document.getElementById('ttAnalysis');
+  loading.classList.add('show'); grid.style.display = 'none'; analysis.style.display = 'none';
+  const prompt = `Você é especialista em TikTok Shop Brasil 2025. Simule uma análise real para a categoria: "${category}".
+Responda APENAS em JSON válido, sem markdown:
+{"categoria":"${category}","total_produtos":847,"produtos":[{"emoji":"emoji","nome":"Nome específico do produto","sub":"Descrição de 1 frase","comissao":"15%","preco_medio":"R$ 89","vendas_mes":"12.4k","score":85,"nivel":"HOT","tags":["tag1","tag2","tag3"],"motivo_viral":"por que viraliza em 1 frase"}],"analise":"Análise estratégica em 3-4 parágrafos sobre tendências, perfil de criador, tipo de vídeo e dicas para afiliados."}
+Gere exatamente 6 produtos reais e específicos em alta no TikTok Shop Brasil em 2025 para ${category}.`;
+  try {
+    const raw = await callClaudeAPI(prompt);
+    const data = JSON.parse(raw.replace(/```json|```/g,'').trim());
+    ttProductsRaw = data.produtos.map(p => `${p.nome} | Comissão: ${p.comissao} | Preço: ${p.preco_medio} | Vendas/mês: ${p.vendas_mes}`).join('\n');
+    document.getElementById('ttResultTitle').textContent = `${data.total_produtos.toLocaleString()} produtos encontrados em "${data.categoria}" — Top 6 pela IA`;
+    document.getElementById('ttCards').innerHTML = data.produtos.map(p => `
+      <div class="tt-card">
+        <div class="tt-card-header"><div class="tt-emoji">${p.emoji}</div><div class="tt-score ${p.nivel==='HOT'?'hot':''}">${p.nivel} · ${p.score}/100</div></div>
+        <div class="tt-name">${p.nome}</div>
+        <div class="tt-sub">${p.sub}</div>
+        <div class="tt-metrics">
+          <div class="tt-metric"><strong>${p.comissao}</strong><span>Comissão</span></div>
+          <div class="tt-metric"><strong>${p.preco_medio}</strong><span>Preço</span></div>
+          <div class="tt-metric"><strong>${p.vendas_mes}</strong><span>Vendas/mês</span></div>
+        </div>
+        <div class="tt-tags">${p.tags.map(t=>`<span class="tt-tag">#${t}</span>`).join('')}</div>
+        <div style="background:rgba(37,244,238,.06);border:1px solid rgba(37,244,238,.12);border-radius:7px;padding:9px 12px;margin-bottom:12px;font-size:.76rem;color:var(--accent2)">⚡ ${p.motivo_viral}</div>
+        <div class="tt-action">
+          <button class="tt-btn-main" onclick="useProductForVideo('${p.nome.replace(/'/g,"\\'")}')">🎬 Criar vídeo</button>
+          <button class="tt-btn-sec" onclick="copyProductInfo('${p.nome.replace(/'/g,"\\'")}','${p.comissao}','${p.preco_medio}')">📋</button>
+        </div>
+      </div>`).join('');
+    document.getElementById('ttAnalysisText').textContent = data.analise;
+    grid.style.display = 'block'; analysis.style.display = 'block';
+  } catch(e) { showToast('Erro ao buscar produtos. Tente novamente.'); console.error(e); }
+  finally { loading.classList.remove('show'); }
+}
+
+function useProductForVideo(productName) {
+  document.getElementById('vProductName').value = productName;
+  document.getElementById('videos').scrollIntoView({behavior:'smooth'});
+  showToast('Produto "' + productName + '" carregado! ✓');
+}
+
+function copyProductInfo(name, comissao, preco) {
+  navigator.clipboard.writeText(`Produto: ${name}\nComissão: ${comissao}\nPreço médio: ${preco}`);
+  showToast('Informações copiadas! ✓');
+}
+
+function copyTTResults() {
+  navigator.clipboard.writeText(ttProductsRaw);
+  showToast('Todos os produtos copiados! ✓');
+}
+
+function generateVideoFromProduct() {
+  document.getElementById('videos').scrollIntoView({behavior:'smooth'});
+}
+
+// ===== CHECKOUT =====
+function openCheckout(plan, price) {
+  document.getElementById('checkoutTitle').textContent = 'Plano ' + plan + ' — ' + price;
+  document.getElementById('checkoutSub').textContent = 'Escolha sua plataforma de pagamento favorita';
+  document.getElementById('checkoutModal').classList.add('show');
+}
+
+function redirectPayment(platform) {
+  // ⚠️ SUBSTITUA PELOS SEUS LINKS REAIS DE CHECKOUT
+  const urls = {
+    hotmart: 'https://hotmart.com/seu-produto',
+    kiwify: 'https://kiwify.com.br/seu-produto',
+    eduzz: 'https://eduzz.com/seu-produto'
+  };
+  const url = urls[platform];
+  if(url && !url.includes('seu-produto')) {
+    window.open(url, '_blank');
+  } else {
+    showToast('Configure os links de pagamento no código ⚠️');
+  }
+}
+
+// ===== UTILS =====
+function copyText(id) {
+  const el = document.getElementById(id);
+  navigator.clipboard.writeText(el.textContent || el.innerText).then(() => showToast('Copiado! ✓'));
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => { if(e.target === overlay) overlay.classList.remove('show'); });
+});
+
+// Auto-carrega TikTok ao entrar na seção
+const ttObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting && !document.getElementById('ttCards').innerHTML) {
+      searchTikTokProducts('Beleza e Skincare', document.querySelector('.cat-btn'));
+    }
+  });
+}, {threshold: 0.2});
+document.addEventListener('DOMContentLoaded', () => {
+  const sec = document.getElementById('tiktok-finder');
+  if(sec) ttObserver.observe(sec);
+});
+
+// FAQ
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.addEventListener('click', () => {
+    item.classList.toggle('open');
+    item.querySelector('.faq-icon').textContent = item.classList.contains('open') ? '−' : '+';
+  });
+});
+</script>
+</body>
+</html>
